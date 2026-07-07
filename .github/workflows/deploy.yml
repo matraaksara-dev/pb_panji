@@ -30,14 +30,25 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Deploy to Vercel Production
+      - name: Pull Vercel project settings
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Build project locally
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy prebuilt to Vercel
         id: deploy
         run: |
-          DEPLOY_URL=$(vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }})
+          DEPLOY_URL=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | grep "https://")
           echo "url=$DEPLOY_URL" >> $GITHUB_OUTPUT
           echo "✅ Deployed to: $DEPLOY_URL"
 
-      - name: Show deployment URL
+      - name: Summary
         run: |
-          echo "🚀 Production URL: https://panji-deoranto-figure.vercel.app"
-          echo "🔗 Deployment URL: ${{ steps.deploy.outputs.url }}"
+          echo "### 🚀 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Production URL**: https://panji-deoranto-figure.vercel.app" >> $GITHUB_STEP_SUMMARY
+          echo "- **Deployment URL**: ${{ steps.deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
