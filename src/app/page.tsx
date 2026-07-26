@@ -132,12 +132,13 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-border/40 bg-card">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg border border-border/40">
                 <Image
                   src="/images/poster-patriot-2026.webp"
                   alt="Ekspedisi Patriot 2026 Papua Barat Daya"
-                  fill
-                  className="object-contain p-2"
+                  width={1512}
+                  height={1040}
+                  className="w-full h-auto"
                 />
               </div>
             </div>
