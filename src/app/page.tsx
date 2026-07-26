@@ -132,12 +132,12 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-border/40">
+              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-lg border border-border/40 bg-card">
                 <Image
                   src="/images/panji.jpg"
                   alt="Ekspedisi Patriot 2026 Papua Barat Daya"
                   fill
-                  className="object-cover"
+                  className="object-contain p-2"
                 />
               </div>
             </div>
